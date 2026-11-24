@@ -26,7 +26,8 @@ def validate(sentence: str) -> None:
     terminators = sum(text.count(c) for c in ".!?")
     if terminators != 1 or not text.endswith("."):
         raise ValueError("must be exactly one sentence ending with a period")
-    if "\n" in text:
+    # Single line only: reject any newline or carriage return inside the sentence.
+    if "\n" in text or "\r" in text:
         raise ValueError("must be a single line")
 
 
